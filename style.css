@@ -292,7 +292,23 @@ body {
   color: var(--text);
   letter-spacing: 0.03em;
   font-weight: 500;
-  transition: color 0.3s ease;
+  transition: color 0.3s ease, opacity 0.6s ease, transform 0.6s ease;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* افکت انیمیشن کارت هنگام ظاهر شدن */
+.animate-card {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 0.7s forwards ease-out;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* نوار تمرکز ورودی‌ها */
@@ -364,4 +380,17 @@ body {
   .birth-fields input {
     width: 100%;
   }
+}
+
+/* امضای پایین صفحه */
+.footer-signature {
+  margin-top: 40px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--text);
+  opacity: 0.5;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  user-select: none;
+  font-family: 'Vazirmatn', sans-serif;
 }
