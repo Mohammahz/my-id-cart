@@ -1,0 +1,151 @@
+:root {
+  --main-color: #3498db;
+  --text-color: #fff;
+  --bg-color: #f4f4f4;
+  --card-bg: #fff;
+}
+
+body {
+  margin: 0;
+  font-family: 'Vazirmatn', sans-serif;
+  font-size: 14px;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: all 0.3s ease;
+}
+
+.container {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: var(--card-bg);
+  border-radius: 15px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+
+h1 {
+  text-align: center;
+  color: var(--main-color);
+  margin-bottom: 30px;
+}
+
+form label {
+  display: block;
+  margin: 10px 0 5px;
+  color: var(--main-color);
+}
+
+form input,
+form textarea,
+form select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--main-color);
+  border-radius: 8px;
+  outline: none;
+  margin-bottom: 10px;
+  font-family: inherit;
+}
+
+textarea {
+  resize: vertical;
+}
+
+button {
+  display: block;
+  width: 100%;
+  background-color: var(--main-color);
+  color: white;
+  border: none;
+  padding: 12px;
+  font-size: 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: darken(var(--main-color), 10%);
+}
+
+#idCard {
+  margin-top: 20px;
+  padding: 20px;
+  border: 2px dashed var(--main-color);
+  border-radius: 10px;
+  background-color: #fff;
+  color: #000;
+  text-align: justify;
+  line-height: 1.8;
+}
+
+#idCard img {
+  max-width: 150px;
+  border-radius: 50%;
+  display: block;
+  margin: 0 auto 15px;
+  border: 3px solid var(--main-color);
+}
+
+.hidden {
+  display: none;
+}
+
+.theme-blue {
+  --main-color: #3498db;
+  --bg-color: #eaf4fc;
+  --card-bg: #ffffff;
+  --text-color: #000;
+}
+
+.theme-red {
+  --main-color: #e74c3c;
+  --bg-color: #fdeeee;
+  --card-bg: #fffafa;
+  --text-color: #000;
+}
+
+.theme-yellow {
+  --main-color: #f1c40f;
+  --bg-color: #fffbe6;
+  --card-bg: #fff9db;
+  --text-color: #000;
+}
+
+.theme-green {
+  --main-color: #2ecc71;
+  --bg-color: #e9fdf0;
+  --card-bg: #f5fff9;
+  --text-color: #000;
+}
+
+.theme-orange {
+  --main-color: #e67e22;
+  --bg-color: #fff0e0;
+  --card-bg: #fff7e6;
+  --text-color: #000;
+}
+
+.theme-purple {
+  --main-color: #9b59b6;
+  --bg-color: #f4e9fb;
+  --card-bg: #faf4ff;
+  --text-color: #000;
+}
+
+/* Responsive */
+@media screen and (max-width: 600px) {
+  .container {
+    margin: 10px;
+    padding: 15px;
+  }
+
+  h1 {
+    font-size: 20px;
+  }
+
+  button {
+    font-size: 14px;
+  }
+}
