@@ -1,52 +1,128 @@
 <!DOCTYPE html>
-<html lang="fa">
+<html lang="fa" dir="rtl">
 <head>
   <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>کارت هویت من</title>
+  <title>my ID|کارت هویت</title>
+
+  <!-- لینک فونت وزیر -->
+  <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@30.1.0/dist/font-face.css" rel="stylesheet" />
+
+  <!-- لینک Font Awesome برای آیکون‌ها -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <!-- فایل CSS اختصاصی -->
   <link rel="stylesheet" href="style.css" />
+
+  <!-- jsPDF برای خروجی PDF -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <!-- فایل JS اختصاصی -->
+  <script defer src="script.js"></script>
 </head>
-<body>
-  <div class="container">
-    <h1>ساخت کارت هویت</h1>
-    <form id="idForm">
-      <label>نام و نام خانوادگی:</label>
-      <input type="text" id="fullName" required />
 
-      <label>تاریخ تولد:</label>
-      <input type="date" id="birthDate" required />
+<body class="theme-blue">
+  <main class="main-wrapper" role="main">
+    <header class="header">
+      <h1 class="app-title">my ID|کارت هویت</h1>
+      <div class="theme-controller">
+        <label for="themeSelector" class="theme-label">انتخاب رنگ تم:</label>
+        <select id="themeSelector" aria-label="انتخاب تم رنگی" class="theme-dropdown">
+          <option value="blue">آبی</option>
+          <option value="yellow">زرد</option>
+          <option value="red">قرمز</option>
+          <option value="green">سبز</option>
+          <option value="orange">نارنجی</option>
+          <option value="purple">بنفش</option>
+        </select>
+      </div>
+    </header>
 
-      <label>شغل:</label>
-      <input type="text" id="job" />
+    <section class="form-section">
+      <form id="identityForm" class="identity-form" autocomplete="on" novalidate>
+        <!-- آپلود عکس پروفایل -->
+        <div class="form-group image-upload-group">
+          <label for="profilePicture">عکس پروفایل:</label>
+          <div class="upload-box">
+            <div id="imagePreview" class="image-preview-box" title="پیش‌نمایش عکس"></div>
+            <input type="file" id="profilePicture" accept="image/*" hidden />
+            <button type="button" id="uploadBtn" class="upload-btn" aria-label="انتخاب عکس پروفایل">
+              <i class="fa-solid fa-upload"></i> انتخاب عکس
+            </button>
+            <button type="button" id="resetPicBtn" class="reset-btn" aria-label="حذف عکس پروفایل">حذف</button>
+          </div>
+        </div>
 
-      <label>بیوگرافی کوتاه:</label>
-      <textarea id="bio" rows="3"></textarea>
+        <!-- اطلاعات شخصی -->
+        <div class="form-group">
+          <label for="firstName">نام:<span aria-hidden="true" style="color:red;">*</span></label>
+          <input type="text" id="firstName" placeholder="مثلاً علی" required aria-required="true" />
+        </div>
 
-      <label>آپلود عکس:</label>
-      <input type="file" id="profilePic" accept="image/*" />
+        <div class="form-group">
+          <label for="lastName">نام خانوادگی:<span aria-hidden="true" style="color:red;">*</span></label>
+          <input type="text" id="lastName" placeholder="مثلاً رضایی" required aria-required="true" />
+        </div>
 
-      <button type="button" id="generateBtn">نمایش کارت هویت</button>
-    </form>
+        <!-- تاریخ تولد -->
+        <div class="form-group birthdate-group">
+          <label>تاریخ تولد:</label>
+          <div class="birth-fields">
+            <input type="number" id="birthDay" placeholder="روز" min="1" max="31" required />
+            <input type="number" id="birthMonth" placeholder="ماه" min="1" max="12" required />
+            <input type="number" id="birthYear" placeholder="سال" min="1300" max="1500" required />
+          </div>
+        </div>
 
-    <div class="theme-selector">
-      <label>انتخاب رنگ:</label>
-      <select id="themeSelect">
-        <option value="blue">آبی</option>
-        <option value="yellow">زرد</option>
-        <option value="red">قرمز</option>
-        <option value="green">سبز</option>
-        <option value="orange">نارنجی</option>
-        <option value="purple">بنفش</option>
-      </select>
-    </div>
+        <!-- سایر اطلاعات -->
+        <div class="form-group">
+          <label for="occupation">شغل:</label>
+          <input type="text" id="occupation" placeholder="مثلاً برنامه‌نویس" />
+        </div>
 
-    <div id="idCard" class="hidden">
-      <img id="cardPhoto" alt="Profile Photo" />
-      <p id="cardText"></p>
-    </div>
-  </div>
+        <div class="form-group">
+          <label for="education">تحصیلات:</label>
+          <input type="text" id="education" placeholder="مثلاً لیسانس نرم‌افزار" />
+        </div>
 
-  <script src="script.js"></script>
+        <div class="form-group">
+          <label for="skills">مهارت‌ها:</label>
+          <textarea id="skills" placeholder="مثلاً طراحی وب، جاوااسکریپت، UI/UX"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="languages">زبان‌ها:</label>
+          <input type="text" id="languages" placeholder="مثلاً فارسی، انگلیسی" />
+        </div>
+
+        <div class="form-group">
+          <label for="interests">علایق:</label>
+          <input type="text" id="interests" placeholder="مثلاً ورزش، تکنولوژی، کتاب" />
+        </div>
+
+        <div class="form-group">
+          <label for="lifeEvents">اتفاقات مهم زندگی:</label>
+          <textarea id="lifeEvents" placeholder="مثلاً مهاجرت، تغییر شغل، موفقیت‌های بزرگ..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="lifeMotto">شعار زندگی:</label>
+          <input type="text" id="lifeMotto" placeholder="مثلاً: هر روز یک قدم به جلو..." />
+        </div>
+
+        <!-- دکمه تولید کارت -->
+        <div class="form-group button-wrapper">
+          <button type="button" id="generateCardBtn" class="generate-button" aria-label="ساخت کارت هویت">
+            <i class="fa-solid fa-id-card"></i>
+            ساخت کارت هویت
+          </button>
+        </div>
+      </form>
+    </section>
+
+    <!-- کارت نهایی -->
+    <section id="identityCardResult" class="id-card hidden" aria-live="polite"></section>
+  </main>
 </body>
 </html>
