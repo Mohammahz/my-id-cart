@@ -1,54 +1,102 @@
-// Access DOM Elements
-const form = document.getElementById("infoForm");
-const idCard = document.getElementById("idCard");
-const profileImageInput = document.getElementById("profileImage");
-const themeSelector = document.getElementById("theme");
+// المان‌ها
+const themeSelector = document.getElementById("themeSelector");
+const profilePicture = document.getElementById("profilePicture");
+const imagePreview = document.getElementById("imagePreview");
+const generateBtn = document.getElementById("generateCardBtn");
+const idCard = document.getElementById("identityCardResult");
 
-// Listen to form submission
-form.addEventListener("submit", function (e) {
-  e.preventDefault();
+// دکمه‌های آپلود و حذف عکس پروفایل
+const uploadBtn = document.getElementById("uploadBtn");
+const resetBtn = document.getElementById("resetPicBtn");
 
-  // Get values
-  const fullName = document.getElementById("fullName").value;
-  const birthday = document.getElementById("birthday").value;
-  const city = document.getElementById("city").value;
-  const hobbies = document.getElementById("hobbies").value;
-  const description = document.getElementById("description").value;
+// تغییر تم رنگی و ذخیره در localStorage
+themeSelector.addEventListener("change", () => {
+  const theme = themeSelector.value;
+  document.body.className = `theme-${theme}`;
+  localStorage.setItem("theme", theme);
+});
 
-  // Load profile image
-  const reader = new FileReader();
-  reader.onload = function () {
-    const imgURL = reader.result;
+// بارگذاری تم ذخیره‌شده در شروع صفحه
+window.addEventListener("DOMContentLoaded", () => {
+  const savedTheme = localStorage.getItem("theme") || "blue";
+  document.body.className = `theme-${savedTheme}`;
+  themeSelector.value = savedTheme;
+});
 
-    // Create ID card content
-    idCard.innerHTML = `
-      <img src="${imgURL}" alt="Profile Image">
-      <p><strong>سلام! من ${fullName} هستم.</strong></p>
-      <p>من در ${birthday} به دنیا آمدم و در شهر زیبای ${city} زندگی می‌کنم. از کودکی همیشه عاشق یادگیری و کشف چیزهای جدید بودم. علاقه‌م به ${hobbies} باعث شده که زندگی‌ام پر از لحظات شاد، انگیزه‌بخش و هدفمند باشد.</p>
-      <p>${description}</p>
-      <p>با پشتکار، امید، و تلاش همیشگی در مسیر رشد فردی و حرفه‌ای‌ام قدم برمی‌دارم. باور دارم که هر فردی می‌تونه قهرمان داستان خودش باشه، فقط باید جرئت شروع داشته باشه.</p>
-    `;
-    idCard.classList.remove("hidden");
-  };
+// پیش‌نمایش تصویر پروفایل بعد از انتخاب
+uploadBtn.addEventListener("click", () => {
+  profilePicture.click();
+});
 
-  // Read profile image if selected
-  if (profileImageInput.files[0]) {
-    reader.readAsDataURL(profileImageInput.files[0]);
+profilePicture.addEventListener("change", () => {
+  const file = profilePicture.files[0];
+  if (file && file.type.startsWith("image/")) {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      imagePreview.style.backgroundImage = `url('${e.target.result}')`;
+    };
+    reader.readAsDataURL(file);
   } else {
-    // No image provided
-    idCard.innerHTML = `
-      <p><strong>سلام! من ${fullName} هستم.</strong></p>
-      <p>من در ${birthday} به دنیا آمدم و در شهر زیبای ${city} زندگی می‌کنم. از کودکی همیشه عاشق یادگیری و کشف چیزهای جدید بودم. علاقه‌م به ${hobbies} باعث شده که زندگی‌ام پر از لحظات شاد، انگیزه‌بخش و هدفمند باشد.</p>
-      <p>${description}</p>
-      <p>با پشتکار، امید، و تلاش همیشگی در مسیر رشد فردی و حرفه‌ای‌ام قدم برمی‌دارم. باور دارم که هر فردی می‌تونه قهرمان داستان خودش باشه، فقط باید جرئت شروع داشته باشه.</p>
-    `;
-    idCard.classList.remove("hidden");
+    imagePreview.style.backgroundImage = "";
   }
 });
 
-// Theme change
-themeSelector.addEventListener("change", function () {
-  const theme = themeSelector.value;
-  document.body.className = ""; // Reset class
-  document.body.classList.add(`theme-${theme}`);
+// حذف تصویر پروفایل
+resetBtn.addEventListener("click", () => {
+  profilePicture.value = "";
+  imagePreview.style.backgroundImage = "";
+});
+
+// ساخت متن کارت هویت حرفه‌ای
+function buildIdentityText() {
+  const formElements = {
+    firstName: document.getElementById("firstName"),
+    lastName: document.getElementById("lastName"),
+    birthDay: document.getElementById("birthDay"),
+    birthMonth: document.getElementById("birthMonth"),
+    birthYear: document.getElementById("birthYear"),
+    occupation: document.getElementById("occupation"),
+    education: document.getElementById("education"),
+    skills: document.getElementById("skills"),
+    languages: document.getElementById("languages"),
+    interests: document.getElementById("interests"),
+    lifeEvents: document.getElementById("lifeEvents"),
+    lifeMotto: document.getElementById("lifeMotto"),
+  };
+
+  const name = formElements.firstName.value.trim();
+  const family = formElements.lastName.value.trim();
+  const day = formElements.birthDay.value.trim();
+  const month = formElements.birthMonth.value.trim();
+  const year = formElements.birthYear.value.trim();
+  const job = formElements.occupation.value.trim();
+  const degree = formElements.education.value.trim();
+  const skillList = formElements.skills.value.trim();
+  const langList = formElements.languages.value.trim();
+  const hobbies = formElements.interests.value.trim();
+  const events = formElements.lifeEvents.value.trim();
+  const motto = formElements.lifeMotto.value.trim();
+
+  return `
+سلام! من ${name} ${family} هستم، متولد ${day}/${month}/${year}. از همان دوران کودکی علاقه زیادی به یادگیری داشتم.
+
+در حال حاضر به عنوان یک ${job || "فرد فعال"} مشغول به کار هستم. تحصیلات من در زمینه ${degree || "نامشخص"} بوده و مسیر یادگیری من همیشه ادامه دارد.
+
+مهارت‌هایی مثل ${skillList || "برنامه‌نویسی، تفکر تحلیلی"} را طی سال‌ها تجربه کسب کرده‌ام. در زبان‌هایی مثل ${langList || "فارسی، انگلیسی"} تسلط دارم و همیشه به دنبال ارتقاء توانایی‌های خود هستم.
+
+از علایقم می‌توان به ${hobbies || "ورزش، موسیقی، طراحی"} اشاره کرد. این‌ها به من انرژی و انگیزه مضاعف می‌دهند.
+
+در طول زندگی، تجربه‌های مهمی داشتم؛ مثل ${events || "تغییر مسیر شغلی، پروژه‌های بزرگ، و رشد فردی."} هرکدام از این‌ها باعث تقویت شخصیت و دیدگاهم نسبت به جهان شدند.
+
+شعار من در زندگی: "${motto || 'با تلاش مداوم به موفقیت می‌رسم'}"
+
+همیشه در مسیر رشد، یادگیری و ساختن دنیایی بهتر قدم برمی‌دارم. این منم، و این داستان هویت من است.
+  `;
+}
+
+// نمایش کارت نهایی با کلیک روی دکمه
+generateBtn.addEventListener("click", () => {
+  const finalText = buildIdentityText();
+  idCard.textContent = finalText;
+  idCard.classList.remove("hidden");
 });
