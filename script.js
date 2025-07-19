@@ -94,9 +94,40 @@ function buildIdentityText() {
   `;
 }
 
-// نمایش کارت نهایی با کلیک روی دکمه
+// اعتبارسنجی و نمایش کارت نهایی با انیمیشن محو شدن
 generateBtn.addEventListener("click", () => {
+  const firstName = document.getElementById("firstName").value.trim();
+  const lastName = document.getElementById("lastName").value.trim();
+  const day = document.getElementById("birthDay").value.trim();
+  const month = document.getElementById("birthMonth").value.trim();
+  const year = document.getElementById("birthYear").value.trim();
+
+  if (!firstName || !lastName) {
+    alert("لطفاً نام و نام خانوادگی را وارد کنید.");
+    return;
+  }
+  if (!day || !month || !year) {
+    alert("لطفاً تاریخ تولد کامل را وارد کنید.");
+    return;
+  }
+  if (Number(day) < 1 || Number(day) > 31 || Number(month) < 1 || Number(month) > 12) {
+    alert("لطفاً تاریخ تولد را به درستی وارد کنید.");
+    return;
+  }
+  if (Number(year) < 1300 || Number(year) > 1500) {
+    alert("سال تولد باید بین 1300 تا 1500 باشد.");
+    return;
+  }
+
   const finalText = buildIdentityText();
   idCard.textContent = finalText;
   idCard.classList.remove("hidden");
+  idCard.style.opacity = 0;
+
+  let opacity = 0;
+  const fadeIn = setInterval(() => {
+    opacity += 0.05;
+    idCard.style.opacity = opacity;
+    if (opacity >= 1) clearInterval(fadeIn);
+  }, 20);
 });
