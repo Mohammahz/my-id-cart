@@ -94,7 +94,7 @@ function buildIdentityText() {
   `;
 }
 
-// اعتبارسنجی و نمایش کارت نهایی با انیمیشن محو شدن
+// اعتبارسنجی و نمایش کارت نهایی با انیمیشن زیبا
 generateBtn.addEventListener("click", () => {
   const firstName = document.getElementById("firstName").value.trim();
   const lastName = document.getElementById("lastName").value.trim();
@@ -121,13 +121,19 @@ generateBtn.addEventListener("click", () => {
 
   const finalText = buildIdentityText();
   idCard.textContent = finalText;
-  idCard.classList.remove("hidden");
-  idCard.style.opacity = 0;
 
-  let opacity = 0;
-  const fadeIn = setInterval(() => {
-    opacity += 0.05;
-    idCard.style.opacity = opacity;
-    if (opacity >= 1) clearInterval(fadeIn);
-  }, 20);
+  // حذف کلاس انیمیشن در صورت وجود برای بازنشانی
+  idCard.classList.remove("animate-card", "hidden");
+  // به‌روزرسانی انیمیشن کارت
+  void idCard.offsetWidth; // Force reflow برای ریست انیمیشن
+
+  idCard.classList.add("animate-card");
+
+  // افزودن امضای پایین صفحه (اگر قبلا اضافه نشده باشد)
+  if (!document.querySelector(".footer-signature")) {
+    const footer = document.createElement("div");
+    footer.className = "footer-signature";
+    footer.textContent = "Made by Hajizadeh";
+    document.body.appendChild(footer);
+  }
 });
