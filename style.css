@@ -1,245 +1,367 @@
-/* فونت و تنظیمات پایه */
-@import url('https://fonts.googleapis.com/css2?family=Vazirmatn&display=swap');
-
 :root {
-  --main-color: #3498db;
-  --bg-color: #f9f9f9;
-  --card-bg: #fff;
-  --text-color: #222;
-  --border-color: #3498db;
-  --button-bg: #3498db;
-  --button-hover-bg: #2980b9;
+  --font-family: 'Vazirmatn', sans-serif;
+  --font-size: 14px;
+  --radius: 12px;
+  --transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* تم‌ها */
+/* تم آبی */
+body.theme-blue {
+  --bg: #e3f2fd;
+  --text: #212121;
+  --card-bg: #ffffff;
+  --btn-bg: #1976d2;
+  --btn-text: #ffffff;
+  --input-bg: #f0f4ff;
+  --border-color: #1976d2;
+}
+
+/* تم زرد */
+body.theme-yellow {
+  --bg: #fffde7;
+  --text: #5a4d00;
+  --card-bg: #fffefa;
+  --btn-bg: #fbc02d;
+  --btn-text: #3e2e00;
+  --input-bg: #fff9c4;
+  --border-color: #fbc02d;
+}
+
+/* تم قرمز */
+body.theme-red {
+  --bg: #ffebee;
+  --text: #3b0000;
+  --card-bg: #fff0f0;
+  --btn-bg: #d32f2f;
+  --btn-text: #fff7f7;
+  --input-bg: #ffdede;
+  --border-color: #d32f2f;
+}
+
+/* تم سبز */
+body.theme-green {
+  --bg: #e8f5e9;
+  --text: #1b3a1a;
+  --card-bg: #f0fbf0;
+  --btn-bg: #388e3c;
+  --btn-text: #e6f3e6;
+  --input-bg: #c8e6c9;
+  --border-color: #388e3c;
+}
+
+/* تم نارنجی */
+body.theme-orange {
+  --bg: #fff3e0;
+  --text: #4e3100;
+  --card-bg: #fff7f0;
+  --btn-bg: #f57c00;
+  --btn-text: #402b00;
+  --input-bg: #ffe0b2;
+  --border-color: #f57c00;
+}
+
+/* تم بنفش */
+body.theme-purple {
+  --bg: #f3e5f5;
+  --text: #3d0066;
+  --card-bg: #f8f0fb;
+  --btn-bg: #8e24aa;
+  --btn-text: #f5e6fa;
+  --input-bg: #e1bee7;
+  --border-color: #8e24aa;
+}
+
+/* استایل پایه */
 body {
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  background-color: var(--bg);
+  color: var(--text);
   margin: 0;
-  font-family: 'Vazirmatn', sans-serif;
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 25px;
+  transition: background-color var(--transition), color var(--transition);
+  /* افکت پس‌زمینه متحرک */
+  background-image: linear-gradient(45deg, var(--btn-bg) 25%, transparent 25%), 
+                    linear-gradient(-45deg, var(--btn-bg) 25%, transparent 25%), 
+                    linear-gradient(45deg, transparent 75%, var(--btn-bg) 75%), 
+                    linear-gradient(-45deg, transparent 75%, var(--btn-bg) 75%);
+  background-size: 40px 40px;
+  background-position: 0 0, 0 20px, 20px -20px, -20px 0px;
+  animation: bgShift 15s linear infinite;
 }
 
-.container {
-  max-width: 600px;
-  margin: 30px auto;
-  background: var(--card-bg);
-  padding: 25px 30px;
-  border-radius: 15px;
-  box-shadow: 0 0 25px rgba(0,0,0,0.1);
+@keyframes bgShift {
+  0% {background-position: 0 0, 0 20px, 20px -20px, -20px 0px;}
+  100% {background-position: 40px 40px, 40px 60px, 60px 20px, 20px 40px;}
 }
 
-h1 {
-  margin-bottom: 25px;
+.main-wrapper {
+  max-width: 820px;
+  margin: auto;
+  background-color: var(--card-bg);
+  border-radius: var(--radius);
+  padding: 40px 50px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+  transition: background-color var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+/* نور هاله رنگی روی کارت */
+.main-wrapper::before {
+  content: "";
+  position: absolute;
+  top: -60%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at center, var(--btn-bg) 15%, transparent 60%);
+  filter: blur(100px);
+  opacity: 0.3;
+  pointer-events: none;
+  transition: background var(--transition);
+  z-index: 0;
+}
+
+.app-title {
   text-align: center;
-  color: var(--main-color);
+  font-size: 30px;
   font-weight: 700;
+  margin-bottom: 35px;
+  color: var(--text);
+  text-shadow: 0 0 5px var(--btn-bg);
+  position: relative;
+  z-index: 1;
+  letter-spacing: 1.5px;
 }
 
-form label {
-  display: block;
-  margin: 15px 0 6px;
-  font-weight: 600;
+/* فرم */
+.identity-form {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  position: relative;
+  z-index: 1;
 }
 
-form input[type="text"],
-form input[type="date"],
-form textarea,
-form select {
-  width: 100%;
-  padding: 10px 14px;
-  border-radius: 8px;
+.form-group {
+  display: flex;
+  flex-direction: column;
+  color: var(--text);
+}
+
+.identity-form input,
+.identity-form textarea,
+.identity-form select {
+  padding: 14px 18px;
+  background-color: var(--input-bg);
+  border-radius: var(--radius);
   border: 2px solid var(--border-color);
-  font-size: 14px;
+  font-size: var(--font-size);
   font-family: inherit;
-  color: var(--text-color);
-  transition: border-color 0.3s ease;
-  box-sizing: border-box;
+  color: var(--text);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: inset 0 0 5px rgba(0,0,0,0.05);
+  outline-offset: 2px;
 }
 
-form input[type="text"]:focus,
-form input[type="date"]:focus,
-form textarea:focus,
-form select:focus {
-  border-color: var(--button-hover-bg);
+.identity-form input:focus,
+.identity-form textarea:focus,
+.identity-form select:focus {
+  border-color: var(--btn-bg);
+  box-shadow: 0 0 12px var(--btn-bg);
   outline: none;
 }
 
-form textarea {
-  resize: vertical;
-  min-height: 70px;
-}
-
-button#generateBtn {
-  margin-top: 25px;
-  width: 100%;
-  background-color: var(--button-bg);
-  color: white;
+/* افکت سه‌بعدی روی دکمه‌ها */
+.upload-btn,
+.reset-btn,
+.generate-button {
+  padding: 12px 22px;
   border: none;
-  padding: 14px 0;
-  font-size: 16px;
-  font-weight: 700;
-  border-radius: 10px;
+  border-radius: var(--radius);
+  font-family: inherit;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  font-size: 15px;
+  font-weight: 700;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
 }
 
-button#generateBtn:hover {
-  background-color: var(--button-hover-bg);
+.upload-btn {
+  background-color: var(--btn-bg);
+  color: var(--btn-text);
 }
 
-.theme-selector {
-  margin-top: 25px;
+.upload-btn:hover {
+  background-color: #0b3d91;
+  box-shadow: 0 8px 15px rgba(25, 118, 210, 0.6);
+  transform: translateY(-3px);
+}
+
+.reset-btn {
+  background-color: #e53935;
+  color: #fff;
+}
+
+.reset-btn:hover {
+  background-color: #b71c1c;
+  box-shadow: 0 8px 15px rgba(229, 57, 53, 0.6);
+  transform: translateY(-3px);
+}
+
+.generate-button {
+  background-color: var(--btn-bg);
+  color: var(--btn-text);
+  font-size: 18px;
+  padding: 15px 30px;
+  margin-top: 30px;
+  border-radius: var(--radius);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.generate-button:hover {
+  background-color: #0b3d91;
+  box-shadow: 0 12px 30px rgba(25, 118, 210, 0.8);
+  transform: translateY(-4px);
+}
+
+/* دکمه‌ها - افکت موج */
+.generate-button::after {
+  content: "";
+  position: absolute;
+  left: -50%;
+  top: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.3) 10%, transparent 40%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  border-radius: var(--radius);
+  z-index: -1;
+}
+
+.generate-button:active::after {
+  opacity: 1;
+  transition: opacity 0.1s ease;
+}
+
+/* پیش‌نمایش عکس پروفایل */
+.upload-box {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 12px;
-  font-weight: 600;
-}
-
-.theme-selector label {
-  color: var(--main-color);
-}
-
-.theme-selector select {
-  padding: 6px 12px;
-  font-size: 14px;
-  border-radius: 8px;
-  border: 2px solid var(--border-color);
-  cursor: pointer;
-  transition: border-color 0.3s ease;
-}
-
-.theme-selector select:focus {
-  outline: none;
-  border-color: var(--button-hover-bg);
-}
-
-#idCard {
-  margin-top: 30px;
-  background: var(--card-bg);
-  border-radius: 15px;
-  padding: 25px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.1);
-  text-align: justify;
-  color: var(--text-color);
-  font-size: 15px;
-  line-height: 1.7;
-  display: none;
+  gap: 18px;
+  flex-wrap: wrap;
   position: relative;
+  z-index: 1;
 }
 
-#idCard img {
-  max-width: 130px;
+.image-preview-box {
+  width: 130px;
+  height: 130px;
   border-radius: 50%;
-  display: block;
-  margin: 0 auto 20px;
-  border: 4px solid var(--main-color);
+  background-color: var(--input-bg);
+  background-size: cover;
+  background-position: center;
+  border: 3px solid var(--btn-bg);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
 }
 
-/* کلاس کمکی برای نمایش کارت */
-.hidden {
-  display: none !important;
+.image-preview-box:hover {
+  transform: scale(1.07);
+  box-shadow: 0 12px 25px var(--btn-bg);
 }
 
-/* تم های رنگی */
-
-body.theme-blue {
-  --main-color: #3498db;
-  --bg-color: #eaf4fc;
-  --card-bg: #fff;
-  --text-color: #222;
-  --border-color: #3498db;
-  --button-bg: #3498db;
-  --button-hover-bg: #2980b9;
+/* کارت نهایی */
+.id-card {
+  background-color: var(--card-bg);
+  padding: 30px 28px;
+  border-radius: var(--radius);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+  margin-top: 50px;
+  line-height: 2.3;
+  font-size: 15px;
+  white-space: pre-wrap;
+  color: var(--text);
+  letter-spacing: 0.03em;
+  font-weight: 500;
+  transition: color 0.3s ease;
 }
 
-body.theme-red {
-  --main-color: #e74c3c;
-  --bg-color: #fdeeee;
-  --card-bg: #fff5f5;
-  --text-color: #222;
-  --border-color: #e74c3c;
-  --button-bg: #e74c3c;
-  --button-hover-bg: #c0392b;
+/* نوار تمرکز ورودی‌ها */
+.identity-form input:focus,
+.identity-form textarea:focus,
+.identity-form select:focus {
+  box-shadow:
+    0 0 8px var(--btn-bg),
+    0 0 15px var(--btn-bg);
 }
 
-body.theme-yellow {
-  --main-color: #f1c40f;
-  --bg-color: #fffbe6;
-  --card-bg: #fff9db;
-  --text-color: #222;
-  --border-color: #f1c40f;
-  --button-bg: #f1c40f;
-  --button-hover-bg: #d4b40a;
-}
-
-body.theme-green {
-  --main-color: #2ecc71;
-  --bg-color: #e9fdf0;
-  --card-bg: #f5fff9;
-  --text-color: #222;
-  --border-color: #2ecc71;
-  --button-bg: #2ecc71;
-  --button-hover-bg: #27ae60;
-}
-
-body.theme-orange {
-  --main-color: #e67e22;
-  --bg-color: #fff0e0;
-  --card-bg: #fff7e6;
-  --text-color: #222;
-  --border-color: #e67e22;
-  --button-bg: #e67e22;
-  --button-hover-bg: #d56f15;
-}
-
-body.theme-purple {
-  --main-color: #9b59b6;
-  --bg-color: #f4e9fb;
-  --card-bg: #faf4ff;
-  --text-color: #222;
-  --border-color: #9b59b6;
-  --button-bg: #9b59b6;
-  --button-hover-bg: #7d3e9d;
-}
-
-/* ریسپانسیو برای موبایل */
-
-@media screen and (max-width: 600px) {
-  .container {
-    margin: 15px;
-    padding: 20px;
+/* پاسخ‌گویی به موبایل و تبلت */
+@media (max-width: 900px) {
+  .main-wrapper {
+    padding: 30px 30px;
+    max-width: 600px;
   }
 
-  h1 {
+  .identity-form {
+    gap: 18px;
+  }
+
+  .form-group.birthdate-group .birth-fields {
+    display: flex;
+    gap: 10px;
+  }
+
+  .birth-fields input {
+    flex: 1;
+  }
+}
+
+@media (max-width: 600px) {
+  body {
+    padding: 15px 10px;
+  }
+
+  .main-wrapper {
+    padding: 20px 15px;
+    max-width: 100%;
+    margin: 0 5px;
+    box-shadow: none;
+  }
+
+  .app-title {
     font-size: 24px;
   }
 
-  form input[type="text"],
-  form input[type="date"],
-  form textarea,
-  form select {
-    font-size: 14px;
-    padding: 10px;
+  .image-preview-box {
+    width: 90px;
+    height: 90px;
   }
 
-  button#generateBtn {
-    font-size: 16px;
-    padding: 12px 0;
-  }
-
-  #idCard {
-    font-size: 14px;
-    padding: 20px;
-  }
-
-  #idCard img {
-    max-width: 110px;
-  }
-
-  .theme-selector {
+  .upload-box {
     flex-direction: column;
-    gap: 6px;
+    gap: 12px;
+  }
+
+  .generate-button {
+    width: 100%;
+    font-size: 16px;
+    padding: 14px 0;
+  }
+
+  .form-group.birthdate-group .birth-fields {
+    flex-direction: column;
+  }
+
+  .birth-fields input {
+    width: 100%;
   }
 }
