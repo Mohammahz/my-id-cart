@@ -6,6 +6,42 @@
 }
 
 /* تم‌ها */
+
+/*تم سفید*/
+
+body.theme-white {
+  --bg: #ffffff;
+  --text: #333333;
+  --card-bg: #ffffff;
+  --btn-bg: #0000003d;
+  --btn-text: #000000;
+  --input-bg: #ffffff;
+  --border-color: #727272;
+}
+
+/* تم مشکی*/
+
+body.theme-black {
+  --bg: #373737;
+  --text: #ffffff;
+  --card-bg: #5b5b5b;
+  --btn-bg: #000000;
+  --btn-text: #ffffff;
+  --input-bg: #000000;
+  --border-color: #727272;
+}
+
+/* تم سرمه ایی*/
+body.theme-Navyblue {
+  --bg: #9fc9ff;
+  --text: #212121;
+  --card-bg: #c4dcff;
+  --btn-bg: #0f2c48;
+  --btn-text: #ffffff;
+  --input-bg: #f0f4ff;
+  --border-color: #0c253d;
+}
+
 /* تم آبی */
 body.theme-blue {
   --bg: #e3f2fd;
@@ -17,10 +53,32 @@ body.theme-blue {
   --border-color: #1976d2;
 }
 
+/* تم سرمه ایی*/
+body.theme-Navyblue {
+  --bg: #c6defe;
+  --text: #212121;
+  --card-bg: #c4dcff;
+  --btn-bg: #0f2c48;
+  --btn-text: #ffffff;
+  --input-bg: #d1e4ff;
+  --border-color: #0c253d;
+}
+
+/*تم فیروزه ای*/
+body.theme-aqua {
+  --bg: #e3f2fd;
+  --text: #003636;
+  --card-bg: #ffffff;
+  --btn-bg: #0bcee3;
+  --btn-text: #ffffff;
+  --input-bg: #f0f4ff;
+  --border-color: #1ddde8;
+}
+
 /* تم زرد */
 body.theme-yellow {
   --bg: #fffde7;
-  --text: #5a4d00;
+  --text: #7b6801;
   --card-bg: #fffefa;
   --btn-bg: #fbc02d;
   --btn-text: #3e2e00;
@@ -54,11 +112,22 @@ body.theme-green {
 body.theme-orange {
   --bg: #fff3e0;
   --text: #4e3100;
-  --card-bg: #fff7f0;
+  --card-bg: #f8dec8;
   --btn-bg: #f57c00;
   --btn-text: #402b00;
-  --input-bg: #ffe0b2;
+  --input-bg: #ffd79b;
   --border-color: #f57c00;
+}
+
+/* تم قهوه ایی*/
+body.theme-Brown {
+  --bg: #fff3e0;
+  --text: #322200;
+  --card-bg: #fff7f0;
+  --btn-bg: #4e2800;
+  --btn-text: #ffdf99;
+  --input-bg: #ffe0b2;
+  --border-color: #3d1e00;
 }
 
 /* تم بنفش */
@@ -70,6 +139,17 @@ body.theme-purple {
   --btn-text: #f5e6fa;
   --input-bg: #e1bee7;
   --border-color: #8e24aa;
+}
+
+/*تم صورتی*/
+body.theme-pink {
+  --bg: #f5e5f4;
+  --text: #8e2e78;
+  --card-bg: #f8f0fb;
+  --btn-bg: #ff00d9;
+  --btn-text: #fae6f8;
+  --input-bg: #e7bedd;
+  --border-color: #aa2e91bb;
 }
 
 /* استایل پایه */
@@ -198,8 +278,8 @@ body {
 }
 
 .upload-btn:hover {
-  background-color: #0b3d91;
-  box-shadow: 0 8px 15px rgba(25, 118, 210, 0.6);
+  background-color: #6c6c6c;
+  box-shadow: 0 8px 15px #6c6c6c;
   transform: translateY(-3px);
 }
 
@@ -225,8 +305,8 @@ body {
 }
 
 .generate-button:hover {
-  background-color: #0b3d91;
-  box-shadow: 0 12px 30px rgba(25, 118, 210, 0.8);
+  background-color: #7e7e7f;
+  box-shadow: 0 12px 30px #7e7e7f;
   transform: translateY(-4px);
 }
 
@@ -300,14 +380,14 @@ body {
 /* افکت انیمیشن کارت هنگام ظاهر شدن */
 .animate-card {
   opacity: 0;
-  transform: translateY(30px);
-  animation: fadeInUp 0.7s forwards ease-out;
+  transform: translateY(40px) scale(0.85);
+  animation: fadeInUpScale 0.7s forwards ease-out;
 }
 
-@keyframes fadeInUp {
+@keyframes fadeInUpScale {
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
   }
 }
 
@@ -394,3 +474,4 @@ body {
   user-select: none;
   font-family: 'Vazirmatn', sans-serif;
 }
+
