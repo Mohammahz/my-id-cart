@@ -5,6 +5,46 @@
   --transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* فونت فارسی (در صورت نیاز به بارگیری فونت Vazirmatn در HTML) */
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn&display=swap');
+
+.theme-dropdown {
+  font-family: 'Vazirmatn', sans-serif;
+  font-size: 16px;
+  padding: 10px 14px;
+  border: 2px solid #ccc;
+  border-radius: 12px;
+  background-color: #ffffff;
+  color: #333;
+  appearance: none;
+  direction: rtl;
+  text-align: right;
+  width: 220px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.41 0L6 4.58 10.59 0 12 1.41l-6 6-6-6L1.41 0z' fill='%23333'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: left 10px center;
+  background-size: 12px;
+}
+
+.theme-dropdown:hover {
+  border-color: #888;
+}
+
+.theme-dropdown:focus {
+  outline: none;
+  border-color: #646464;
+  box-shadow: 0 0 0 3px rgba(68, 68, 68, 0.2);
+}
+
+.theme-dropdown option {
+  font-family: 'Vazirmatn', sans-serif;
+  direction: rtl;
+}
+
+
 /* تم‌ها */
 
 /*تم سفید*/
@@ -17,7 +57,7 @@ body.theme-white {
   --btn-text: #000000;
   --input-bg: #ffffff;
   --border-color: #727272;
-}
+} 
 
 /* تم مشکی*/
 
@@ -27,19 +67,19 @@ body.theme-black {
   --card-bg: #5b5b5b;
   --btn-bg: #000000;
   --btn-text: #ffffff;
-  --input-bg: #000000;
-  --border-color: #727272;
+  --input-bg: #3c3c3c;
+  --border-color: #000000;
 }
 
 /* تم سرمه ایی*/
 body.theme-Navyblue {
-  --bg: #9fc9ff;
+  --bg: #142131;
   --text: #212121;
   --card-bg: #c4dcff;
-  --btn-bg: #0f2c48;
+  --btn-bg: #082541;
   --btn-text: #ffffff;
   --input-bg: #f0f4ff;
-  --border-color: #0c253d;
+  --border-color: #071f36;
 }
 
 /* تم آبی */
@@ -58,7 +98,7 @@ body.theme-Navyblue {
   --bg: #c6defe;
   --text: #212121;
   --card-bg: #c4dcff;
-  --btn-bg: #0f2c48;
+  --btn-bg: #0b243b;
   --btn-text: #ffffff;
   --input-bg: #d1e4ff;
   --border-color: #0c253d;
@@ -125,8 +165,8 @@ body.theme-Brown {
   --text: #322200;
   --card-bg: #fff7f0;
   --btn-bg: #4e2800;
-  --btn-text: #ffdf99;
-  --input-bg: #ffe0b2;
+  --btn-text: #ffefd9;
+  --input-bg: #ffefd9;
   --border-color: #3d1e00;
 }
 
@@ -474,4 +514,4 @@ body {
   user-select: none;
   font-family: 'Vazirmatn', sans-serif;
 }
-
+ 
